@@ -52,7 +52,7 @@ def main():
 
     # TODO: print out the results, each pair in it's own line
     for res in result:
-        print(res)
+        print(res[0], res[1])
 
 
 if __name__ == "__main__":
