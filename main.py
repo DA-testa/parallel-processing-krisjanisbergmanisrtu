@@ -15,13 +15,15 @@ def parallel_processing(n, m, data):
 
     while len(output) < int(m):
         for threadIndex in range(int(n)):
-            if threads[threadIndex][0] == 0:  # if job reaches execution timeout
-                # output.append([getattr(threads[threadIndex]), i]) # then add it to results
+            if threads[threadIndex][0] <= 0:  # if job reaches execution timeout
                 output.append([threadIndex, threads[threadIndex][1]])  # then add it to results
 
                 job_index = +1  # look at next job
 
-                threads[threadIndex][0] = int(data[job_index])  # put next job in this thread (puts the timer in thread)
+                # put next job in this thread (puts the timer in thread)
+                # if it is 1 then it will count 1 too many times so we decrease leave it as 0
+                threads[threadIndex][0] = 0 if int(data[job_index]) == 1 else int(data[job_index])
+
                 threads[threadIndex][1] = i
 
             else:  # Else decrease time left in job
